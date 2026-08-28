@@ -1,0 +1,107 @@
+$forest-green: #52734d;
+$cream: #fff9e8;
+$dark-brown: #4b382a;
+$medium-brown: #70543b;
+$orange: #bd7845;
+$orange-shadow: #7d4c2c;
+
+.app {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgb(255 255 255 / 35%),
+      transparent 30%
+    ),
+    linear-gradient(160deg, #dce8ca 0%, #a9c68e 100%);
+
+  .welcome-card {
+    width: min(100%, 620px);
+    padding: 56px 48px;
+    text-align: center;
+
+    background-color: $cream;
+    border: 4px solid $medium-brown;
+    border-radius: 18px;
+    box-shadow:
+      0 8px 0 #4c382a,
+      0 18px 40px rgb(49 60 34 / 25%);
+
+    .game-title {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 8px 16px;
+
+      color: $cream;
+      background-color: $forest-green;
+      border-radius: 999px;
+
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      color: $dark-brown;
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      line-height: 1;
+    }
+
+    p {
+      max-width: 440px;
+      margin: 24px auto 32px;
+
+      color: #6c6253;
+      font-family: Arial, sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .primary-button {
+      padding: 14px 22px;
+
+      color: $cream;
+      background-color: $orange;
+      border: 0;
+      border-radius: 10px;
+      box-shadow: 0 5px 0 $orange-shadow;
+
+      font-weight: 700;
+      cursor: pointer;
+
+      transition:
+        transform 150ms ease,
+        box-shadow 150ms ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 7px 0 $orange-shadow;
+      }
+
+      &:active {
+        transform: translateY(3px);
+        box-shadow: 0 2px 0 $orange-shadow;
+      }
+
+      &:focus-visible {
+        outline: 4px solid rgb(82 115 77 / 35%);
+        outline-offset: 4px;
+      }
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .app {
+    .welcome-card {
+      padding: 40px 24px;
+    }
+  }
+}
