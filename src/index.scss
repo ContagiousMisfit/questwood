@@ -1,20 +1,26 @@
 :root {
+  // Typography
   --font-display: 'Pixelify Sans', sans-serif;
   --font-body: 'Nunito', sans-serif;
 
-  // Core forest palette
-  --color-bark-900: #362a19;
-  --color-bark-700: #483423;
+  // Core palette
+  --color-sky: #159ed0;
+  --color-cloud: #edf6e8;
 
-  --color-forest-800: #385032;
-  --color-moss-800: #575637;
-  --color-moss-600: #63664f;
-  --color-sage-500: #7a845e;
-  --color-sage-300: #919367;
+  --color-forest: #17695f;
+  --color-forest-dark: #0e4d47;
 
-  --color-gold-500: #ada537;
-  --color-rose-500: #965f8a;
-  --color-rose-300: #eba195;
+  --color-meadow: #79b94b;
+  --color-meadow-dark: #568e38;
+  --color-grass-light: #a8d754;
+
+  --color-flower: #fff8dc;
+  --color-sun-gold: #ded45b;
+
+  --color-earth: #69533a;
+  --color-earth-light: #9b805b;
+
+  --color-danger: #c9655a;
 
   // UI surfaces
   --color-parchment: #f2e6c5;
@@ -22,40 +28,47 @@
   --color-parchment-muted: #d9cfaa;
 
   // Semantic colors
-  --color-text: var(--color-bark-900);
-  --color-text-soft: var(--color-moss-600);
+  --color-text: #29483d;
+  --color-text-soft: #66745b;
 
-  --color-primary: var(--color-forest-800);
-  --color-primary-hover: var(--color-moss-800);
-  --color-accent: var(--color-rose-500);
-  --color-reward: var(--color-gold-500);
+  --color-primary: var(--color-forest);
+  --color-primary-hover: var(--color-forest-dark);
 
-  --color-border: var(--color-bark-700);
-  --color-border-light: #8b6b50;
+  --color-accent: var(--color-sky);
+  --color-reward: var(--color-sun-gold);
 
-  --color-night: var(--color-bark-900);
-  --color-slate: var(--color-moss-800);
-  --color-garden-blue: var(--color-forest-800);
-  --color-violet: var(--color-rose-500);
-  --color-stone: var(--color-moss-600);
-  --color-blue-soft: var(--color-sage-500);
-  --color-mist: var(--color-sage-300);
-  --color-sage: var(--color-sage-500);
-  --color-wood: var(--color-border-light);
-  --color-moss: var(--color-sage-300);
-  --color-warm-stone: var(--color-parchment-muted);
-  --color-leaf-gold: var(--color-gold-500);
+  --color-border: var(--color-earth);
+  --color-border-light: var(--color-earth-light);
+
   --color-panel: var(--color-parchment);
   --color-panel-highlight: var(--color-parchment-light);
   --color-panel-muted: var(--color-parchment-muted);
 
+  // Temporary aliases used by existing components
+  --color-night: var(--color-forest-dark);
+  --color-slate: var(--color-forest);
+  --color-garden-blue: var(--color-sky);
+  --color-violet: var(--color-accent);
+  --color-stone: var(--color-text-soft);
+  --color-blue-soft: var(--color-forest);
+  --color-mist: var(--color-cloud);
+  --color-sage: var(--color-meadow);
+  --color-wood: var(--color-earth-light);
+  --color-moss: var(--color-meadow-dark);
+  --color-warm-stone: var(--color-parchment-muted);
+  --color-leaf-gold: var(--color-sun-gold);
+
+  // Shape
   --radius-small: 8px;
   --radius-medium: 12px;
   --radius-large: 18px;
 
   font-family: var(--font-body);
   color: var(--color-text);
-  background-color: var(--color-bark-900);
+  background-color: var(--color-sky);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
 }
 
 * {
@@ -87,7 +100,6 @@ textarea {
   font: inherit;
 }
 
-
 button {
   color: inherit;
 }
@@ -106,20 +118,21 @@ h3 {
 }
 
 ::selection {
-  color: var(--color-panel-highlight);
-  background-color: var(--color-garden-blue);
+  color: var(--color-flower);
+  background-color: var(--color-primary);
 }
-
 
 @media (max-width: 700px) {
   input,
   select,
   textarea {
+    // Prevents automatic zoom on iPhone.
     font-size: 16px;
   }
 
   button,
   [role='button'] {
+    // Recommended minimum touch target.
     min-height: 44px;
   }
 }

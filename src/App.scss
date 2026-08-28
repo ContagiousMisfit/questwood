@@ -8,10 +8,11 @@
 
   width: 100%;
   min-width: 320px;
+
   min-height: 100vh;
   min-height: 100dvh;
 
-  overflow-x: clip;
+  overflow-x: hidden;
 
   padding:
     max(32px, env(safe-area-inset-top))
@@ -19,7 +20,7 @@
     max(32px, env(safe-area-inset-bottom))
     max(24px, env(safe-area-inset-left));
 
-  background-color: var(--color-bark-900);
+  background-color: var(--color-sky);
 
   .quest-board,
   .game-shell {

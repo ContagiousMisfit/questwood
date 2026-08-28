@@ -1,4 +1,6 @@
-export type QuestPeriod = 'daily' | 'weekly'
+export type QuestPeriod =
+  | 'daily'
+  | 'weekly'
 
 export type QuestFilter =
   | QuestPeriod
@@ -7,10 +9,19 @@ export type QuestFilter =
 export type Quest = {
   id: string
   title: string
-  period: QuestPeriod
   completed: boolean
   xp: number
+  period?: QuestPeriod
+  coins?: number
+  createdAt?: string
+  completedAt?: string | null
+}
+
+export type PlayerStats = {
+  totalXp: number
+  currentLevelXp: number
+  xpForNextLevel: number
+  level: number
   coins: number
-  createdAt: string
-  completedAt: string | null
+  streak: number
 }
