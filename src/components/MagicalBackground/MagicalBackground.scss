@@ -1,137 +1,98 @@
 .magical-background {
   position: fixed;
-  z-index: 0;
+  z-index: -1;
   inset: 0;
 
   overflow: hidden;
   pointer-events: none;
-  background-color: var(--forest-950);
+  background-color: #362a19;
+}
 
-  .garden-background {
+.garden-background {
+  position: absolute;
+  top: -3%;
+  left: -2%;
+
+  width: 104%;
+  height: 116%;
+
+  object-fit: cover;
+  object-position: center 8%;
+
+  filter:
+    saturate(0.95)
+    contrast(1.03)
+    brightness(0.92);
+
+  animation: forest-breathe 22s ease-in-out infinite alternate;
+}
+
+.background-shade {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgb(30 37 24 / 48%) 0%,
+      rgb(30 37 24 / 12%) 38%,
+      rgb(40 25 22 / 34%) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgb(28 30 20 / 12%) 0%,
+      rgb(28 30 20 / 52%) 100%
+    );
+}
+
+.forest-glow {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 34% 35%,
+      rgb(224 220 133 / 24%),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 78% 28%,
+      rgb(235 161 149 / 12%),
+      transparent 28%
+    );
+
+  animation: glow-drift 9s ease-in-out infinite alternate;
+}
+
+.light-motes {
+  position: absolute;
+  inset: 0;
+
+  span {
     position: absolute;
-    inset: -2%;
+    bottom: -20px;
 
-    width: 104%;
-    height: 104%;
-    object-fit: cover;
-    object-position: center;
+    width: 5px;
+    height: 5px;
 
-    animation: garden-breathe 18s ease-in-out infinite alternate;
-  }
-
-  .ambient-light {
-    position: absolute;
-    top: -20%;
-    left: 30%;
-
-    width: 60%;
-    aspect-ratio: 1;
+    background-color: #e9dc82;
     border-radius: 50%;
+    box-shadow: 0 0 10px #e9dc82;
 
-    background:
-      radial-gradient(
-        circle,
-        rgb(212 209 108 / 24%),
-        transparent 68%
-      );
-
-    animation: light-pulse 7s ease-in-out infinite;
+    opacity: 0;
+    animation: mote-rise 10s linear infinite;
   }
 
-  .background-veil {
-    position: absolute;
-    inset: 0;
-
-    background:
-      linear-gradient(
-        90deg,
-        rgb(38 59 79 / 26%),
-        rgb(38 59 79 / 4%) 38%,
-        rgb(38 59 79 / 4%) 62%,
-        rgb(38 59 79 / 24%)
-      );
-  }
-
-  .light-motes {
-    position: absolute;
-    inset: 0;
-
-    span {
-      position: absolute;
-
-      width: 5px;
-      height: 5px;
-
-      background-color: var(--sunlit-leaf);
-      border-radius: 50%;
-      box-shadow: 0 0 8px rgb(212 209 108 / 75%);
-
-      opacity: 0;
-      animation: mote-float 7s ease-in-out infinite;
-    }
-
-    span:nth-child(1) {
-      top: 20%;
-      left: 8%;
-    }
-
-    span:nth-child(2) {
-      top: 35%;
-      left: 19%;
-      animation-delay: -2s;
-    }
-
-    span:nth-child(3) {
-      top: 62%;
-      left: 10%;
-      animation-delay: -5s;
-    }
-
-    span:nth-child(4) {
-      top: 75%;
-      left: 22%;
-      animation-delay: -3s;
-    }
-
-    span:nth-child(5) {
-      top: 14%;
-      left: 76%;
-      animation-delay: -4s;
-    }
-
-    span:nth-child(6) {
-      top: 29%;
-      left: 91%;
-      animation-delay: -1s;
-    }
-
-    span:nth-child(7) {
-      top: 54%;
-      left: 84%;
-      animation-delay: -6s;
-    }
-
-    span:nth-child(8) {
-      top: 81%;
-      left: 92%;
-      animation-delay: -2.5s;
-    }
-
-    span:nth-child(9) {
-      top: 45%;
-      left: 4%;
-      animation-delay: -1.5s;
-    }
-
-    span:nth-child(10) {
-      top: 68%;
-      left: 96%;
-      animation-delay: -4.5s;
+  @for $index from 1 through 12 {
+    span:nth-child(#{$index}) {
+      left: random(90) * 1%;
+      animation-delay: random(9) * -1s;
+      animation-duration: (8 + random(7)) * 1s;
     }
   }
 }
 
-@keyframes garden-breathe {
+@keyframes forest-breathe {
   from {
     transform: scale(1);
   }
@@ -141,48 +102,55 @@
   }
 }
 
-@keyframes light-pulse {
-  0%,
-  100% {
-    opacity: 0.6;
-    transform: scale(1);
+@keyframes glow-drift {
+  from {
+    opacity: 0.65;
+    transform: translateX(-1%);
   }
 
-  50% {
+  to {
     opacity: 1;
-    transform: scale(1.08);
+    transform: translateX(1%);
   }
 }
 
-@keyframes mote-float {
-  0%,
-  100% {
+@keyframes mote-rise {
+  0% {
     opacity: 0;
-    transform: translate(0, 12px);
+    transform: translateY(0) scale(0.7);
   }
 
-  50% {
-    opacity: 1;
-    transform: translate(8px, -12px);
+  15%,
+  70% {
+    opacity: 0.75;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-90vh) scale(1.2);
   }
 }
 
 @media (max-width: 640px) {
-  .magical-background {
-    .garden-background {
-      // No mobile, as laterais serão cortadas.
-      // Mantemos fonte e área iluminada visíveis.
-      object-position: 48% center;
-    }
+  .garden-background {
+    top: -3%;
+    left: -12%;
 
-    .background-veil {
-      background-color: rgb(38 59 79 / 16%);
-    }
+    width: 124%;
+    height: 126%;
+
+    object-position: 58% top;
+  }
+
+  .light-motes span:nth-child(n + 7) {
+    display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .magical-background * {
-    animation: none !important;
+  .garden-background,
+  .forest-glow,
+  .light-motes span {
+    animation: none;
   }
 }

@@ -2,19 +2,37 @@
   position: relative;
   isolation: isolate;
 
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
   min-height: 100dvh;
-  place-items: center;
 
-  overflow-x: hidden;
-  padding: clamp(32px, 5vw, 72px);
+  overflow-x: clip;
 
-  background-color: var(--color-night);
+  padding:
+    max(32px, env(safe-area-inset-top))
+    max(24px, env(safe-area-inset-right))
+    max(32px, env(safe-area-inset-bottom))
+    max(24px, env(safe-area-inset-left));
+
+  background-color: var(--color-bark-900);
+
+  .quest-board,
+  .game-shell {
+    margin-block: auto;
+  }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 700px) {
   .app {
-    place-items: start center;
-    padding: 24px 14px;
+    padding:
+      max(16px, env(safe-area-inset-top))
+      max(12px, env(safe-area-inset-right))
+      max(20px, env(safe-area-inset-bottom))
+      max(12px, env(safe-area-inset-left));
   }
 }

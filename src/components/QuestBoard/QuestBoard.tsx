@@ -1,14 +1,52 @@
-import { useState, type FormEvent } from 'react'
-import QuestItem from '../QuestItem/QuestItem'
+import {
+    useEffect,
+    useState,
+    type FormEvent,
+} from 'react'
+
 import type { Quest } from '../../types/quest'
-import './QuestBoard.scss'
+import useQuestSound from '../../hooks/useQuestSound'
+import QuestItem from '../QuestItem/QuestItem'
 import GamePanel from '../ui/GamePanel/GamePanel'
 
-function QuestBoard() {
-    const [quests, setQuests] = useState<Quest[]>([])
-    const [newQuestTitle, setNewQuestTitle] = useState('')
+import './QuestBoard.scss'
 
-    const completedQuests = quests.filter((quest) => quest.completed)
+const STORAGE_KEY = 'questwood:quests'
+
+function loadQuests(): Quest[] {
+    try {
+        const storedQuests = localStorage.getItem(STORAGE_KEY)
+
+        if (!storedQuests) {
+            return []
+        }
+
+        return JSON.parse(storedQuests) as Quest[]
+    } catch {
+        return []
+    }
+}
+
+function QuestBoard() {
+    const [quests, setQuests] =
+        useState<Quest[]>(loadQuests)
+
+    const [newQuestTitle, setNewQuestTitle] =
+        useState('')
+
+    const playCompletionSound = useQuestSound()
+
+    useEffect(() => {
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(quests),
+        )
+    }, [quests])
+
+    const completedQuests = quests.filter(
+        (quest) => quest.completed,
+    )
+
     const completedCount = completedQuests.length
 
     const earnedXp = completedQuests.reduce(
@@ -19,9 +57,13 @@ function QuestBoard() {
     const progress =
         quests.length === 0
             ? 0
-            : Math.round((completedCount / quests.length) * 100)
+            : Math.round(
+                (completedCount / quests.length) * 100,
+            )
 
-    function handleAddQuest(event: FormEvent<HTMLFormElement>) {
+    function handleAddQuest(
+        event: FormEvent<HTMLFormElement>,
+    ) {
         event.preventDefault()
 
         const trimmedTitle = newQuestTitle.trim()
@@ -46,11 +88,30 @@ function QuestBoard() {
     }
 
     function handleToggleQuest(questId: string) {
+        const selectedQuest = quests.find(
+            (quest) => quest.id === questId,
+        )
+
+        if (selectedQuest && !selectedQuest.completed) {
+            playCompletionSound()
+        }
+
         setQuests((currentQuests) =>
             currentQuests.map((quest) =>
                 quest.id === questId
-                    ? { ...quest, completed: !quest.completed }
+                    ? {
+                        ...quest,
+                        completed: !quest.completed,
+                    }
                     : quest,
+            ),
+        )
+    }
+
+    function handleDeleteQuest(questId: string) {
+        setQuests((currentQuests) =>
+            currentQuests.filter(
+                (quest) => quest.id !== questId,
             ),
         )
     }
@@ -59,9 +120,15 @@ function QuestBoard() {
         <GamePanel className="quest-board">
             <header className="board-header">
                 <div>
-                    <span className="board-eyebrow">Questwood Journal</span>
+                    <span className="board-eyebrow">
+                        Questwood Journal
+                    </span>
+
                     <h1>Today's quests</h1>
-                    <p>Small deeds make great adventures.</p>
+
+                    <p>
+                        Small deeds make great adventures.
+                    </p>
                 </div>
 
                 <div className="xp-display">
@@ -94,7 +161,10 @@ function QuestBoard() {
                 </div>
             </div>
 
-            <form className="quest-form" onSubmit={handleAddQuest}>
+            <form
+                className="quest-form"
+                onSubmit={handleAddQuest}
+            >
                 <label htmlFor="new-quest">
                     Add a new quest
                 </label>
@@ -104,8 +174,11 @@ function QuestBoard() {
                         id="new-quest"
                         type="text"
                         value={newQuestTitle}
-                        onChange={(event) => setNewQuestTitle(event.target.value)}
+                        onChange={(event) =>
+                            setNewQuestTitle(event.target.value)
+                        }
                         placeholder="What will you accomplish?"
+                        maxLength={80}
                     />
 
                     <button type="submit">
@@ -121,12 +194,13 @@ function QuestBoard() {
                             key={quest.id}
                             quest={quest}
                             onToggle={handleToggleQuest}
+                            onDelete={handleDeleteQuest}
                         />
                     ))}
                 </ul>
             ) : (
                 <div className="empty-state">
-                    <span>🌱</span>
+                    <span aria-hidden="true">🌱</span>
                     <p>Your quest journal is empty.</p>
                 </div>
             )}

@@ -13,11 +13,11 @@ function MagicalBackground() {
         alt=""
       />
 
-      <div className="ambient-light" />
-      <div className="background-veil" />
+      <div className="background-shade" />
+      <div className="forest-glow" />
 
       <div className="light-motes">
-        {Array.from({ length: 10 }, (_, index) => (
+        {Array.from({ length: 12 }, (_, index) => (
           <span key={index} />
         ))}
       </div>
