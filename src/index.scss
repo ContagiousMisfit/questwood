@@ -1,72 +1,66 @@
 :root {
-  // Typography
+  --font-ui: 'Pixelify Sans', sans-serif;
   --font-display: 'Pixelify Sans', sans-serif;
   --font-body: 'Nunito', sans-serif;
 
-  // Core palette
-  --color-sky: #159ed0;
-  --color-cloud: #edf6e8;
+  // Color Hunt: FEEAC9 · FFCDC9 · FDACAC · FD7979
+  --color-rose-50: #fffaf5;
+  --color-rose-100: #feeac9;
+  --color-rose-200: #ffcdc9;
+  --color-rose-300: #fdacac;
+  --color-rose-400: #fd7979;
+  --color-rose-500: #e96370;
+  --color-rose-600: #b94f5d;
+  --color-rose-700: #8f4050;
+  --color-plum-800: #703744;
+  --color-plum-900: #4b2d35;
 
-  --color-forest: #17695f;
-  --color-forest-dark: #0e4d47;
-
-  --color-meadow: #79b94b;
-  --color-meadow-dark: #568e38;
-  --color-grass-light: #a8d754;
-
-  --color-flower: #fff8dc;
-  --color-sun-gold: #ded45b;
-
-  --color-earth: #69533a;
-  --color-earth-light: #9b805b;
-
-  --color-danger: #c9655a;
-
-  // UI surfaces
-  --color-parchment: #f2e6c5;
-  --color-parchment-light: #fff5da;
-  --color-parchment-muted: #d9cfaa;
+  --color-sprout-cream: var(--color-rose-100);
+  --color-sprout-cream-light: var(--color-rose-50);
+  --color-sprout-tan: var(--color-rose-200);
+  --color-sprout-brown: var(--color-rose-700);
+  --color-sprout-brown-dark: var(--color-plum-800);
+  --color-sprout-plum: var(--color-rose-700);
+  --color-sprout-green: var(--color-rose-300);
+  --color-sprout-green-dark: var(--color-rose-600);
+  --color-sprout-pink: var(--color-rose-400);
+  --color-sprout-gold: var(--color-rose-100);
 
   // Semantic colors
-  --color-text: #29483d;
-  --color-text-soft: #66745b;
+  --color-sky: var(--color-rose-200);
+  --color-cloud: var(--color-rose-50);
+  --color-forest: var(--color-sprout-green-dark);
+  --color-forest-dark: var(--color-plum-800);
+  --color-meadow: var(--color-sprout-green);
+  --color-meadow-dark: var(--color-rose-600);
+  --color-grass-light: var(--color-rose-200);
+  --color-flower: var(--color-sprout-cream-light);
+  --color-sun-gold: var(--color-sprout-gold);
+  --color-earth: var(--color-plum-800);
+  --color-earth-light: var(--color-sprout-brown);
+  --color-danger: #b94e68;
+  --color-ink: var(--color-plum-900);
+  --color-text: var(--color-ink);
+  --color-text-soft: #74545d;
+  --color-primary: var(--color-sprout-green-dark);
+  --color-primary-hover: var(--color-rose-700);
+  --color-accent: var(--color-sprout-pink);
+  --color-reward: var(--color-rose-400);
+  --color-border: var(--color-sprout-brown-dark);
+  --color-border-light: var(--color-sprout-brown);
+  --color-panel: var(--color-sprout-cream);
+  --color-panel-highlight: var(--color-sprout-cream-light);
+  --color-panel-muted: var(--color-rose-200);
 
-  --color-primary: var(--color-forest);
-  --color-primary-hover: var(--color-forest-dark);
+  --radius-small: 7px;
+  --radius-medium: 11px;
+  --radius-large: 16px;
 
-  --color-accent: var(--color-sky);
-  --color-reward: var(--color-sun-gold);
-
-  --color-border: var(--color-earth);
-  --color-border-light: var(--color-earth-light);
-
-  --color-panel: var(--color-parchment);
-  --color-panel-highlight: var(--color-parchment-light);
-  --color-panel-muted: var(--color-parchment-muted);
-
-  // Temporary aliases used by existing components
-  --color-night: var(--color-forest-dark);
-  --color-slate: var(--color-forest);
-  --color-garden-blue: var(--color-sky);
-  --color-violet: var(--color-accent);
-  --color-stone: var(--color-text-soft);
-  --color-blue-soft: var(--color-forest);
-  --color-mist: var(--color-cloud);
-  --color-sage: var(--color-meadow);
-  --color-wood: var(--color-earth-light);
-  --color-moss: var(--color-meadow-dark);
-  --color-warm-stone: var(--color-parchment-muted);
-  --color-leaf-gold: var(--color-sun-gold);
-
-  // Shape
-  --radius-small: 8px;
-  --radius-medium: 12px;
-  --radius-large: 18px;
-
-  font-family: var(--font-body);
   color: var(--color-text);
-  background-color: var(--color-sky);
-
+  background-color: var(--color-plum-800);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
@@ -88,9 +82,35 @@ body,
   min-height: 100dvh;
 }
 
+html,
+body {
+  cursor:
+    url('./assets/sprout/cursor-default.png') 7 2,
+    default;
+}
+
 body {
   margin: 0;
   overflow-x: hidden;
+}
+
+button,
+label,
+a,
+input,
+select,
+[role='button'] {
+  cursor:
+    url('./assets/sprout/cursor-pointer.png') 5 1,
+    pointer;
+}
+
+button:active,
+label:active,
+[role='button']:active {
+  cursor:
+    url('./assets/sprout/cursor-active.png') 7 5,
+    pointer;
 }
 
 button,
@@ -114,25 +134,28 @@ p {
 h1,
 h2,
 h3 {
-  font-family: var(--font-display);
+  font-family: var(--font-ui);
+  font-weight: 400;
+}
+
+button {
+  font-weight: 800;
 }
 
 ::selection {
-  color: var(--color-flower);
-  background-color: var(--color-primary);
+  color: var(--color-sprout-cream-light);
+  background-color: var(--color-sprout-plum);
 }
 
 @media (max-width: 700px) {
   input,
   select,
   textarea {
-    // Prevents automatic zoom on iPhone.
     font-size: 16px;
   }
 
   button,
   [role='button'] {
-    // Recommended minimum touch target.
     min-height: 44px;
   }
 }

@@ -1,5 +1,7 @@
 import {
+  useEffect,
   useMemo,
+  useRef,
   useState,
   type FormEvent,
 } from 'react'
@@ -14,6 +16,12 @@ import useQuests from '../../hooks/useQuests'
 
 import QuestItem from '../QuestItem/QuestItem'
 import QuestNavigation from '../QuestNavigation/QuestNavigation'
+import GameHud from '../GameHud/GameHud'
+import MascotGarden from '../MascotGarden/MascotGarden'
+import {
+  type MascotMood,
+} from '../SproutMascot/SproutMascot'
+import PixelIcon from '../ui/PixelIcon/PixelIcon'
 import GamePanel from '../ui/GamePanel/GamePanel'
 
 import './QuestBoard.scss'
@@ -62,6 +70,16 @@ function QuestBoard() {
 
   const [activeFilter, setActiveFilter] =
     useState<QuestFilter>('daily')
+
+  const [mascotMood, setMascotMood] =
+    useState<MascotMood>('idle')
+
+  const [mascotAnimationKey, setMascotAnimationKey] =
+    useState(0)
+
+  const mascotTimerRef = useRef<number | null>(
+    null,
+  )
 
   const {
     quests,
@@ -125,6 +143,28 @@ function QuestBoard() {
   const currentContent =
     filterContent[activeFilter]
 
+  useEffect(() => {
+    return () => {
+      if (mascotTimerRef.current !== null) {
+        window.clearTimeout(mascotTimerRef.current)
+      }
+    }
+  }, [])
+
+  function triggerMascot(mood: MascotMood) {
+    if (mascotTimerRef.current !== null) {
+      window.clearTimeout(mascotTimerRef.current)
+    }
+
+    setMascotMood(mood)
+    setMascotAnimationKey((currentKey) => currentKey + 1)
+
+    mascotTimerRef.current = window.setTimeout(
+      () => setMascotMood('idle'),
+      1500,
+    )
+  }
+
   function handleFilterChange(
     filter: QuestFilter,
   ) {
@@ -151,6 +191,7 @@ function QuestBoard() {
 
     setNewQuestTitle('')
     playCreateSound()
+    triggerMascot('created')
   }
 
   function handleToggleQuest(questId: string) {
@@ -158,6 +199,7 @@ function QuestBoard() {
 
     if (updatedQuest?.completed) {
       playCompleteSound()
+      triggerMascot('completed')
     }
   }
 
@@ -166,20 +208,30 @@ function QuestBoard() {
 
     if (wasDeleted) {
       playRemoveSound()
+      triggerMascot('removed')
     }
   }
 
   return (
     <div className="game-shell">
-      <QuestNavigation
-        activeFilter={activeFilter}
-        counts={counts}
-        onFilterChange={handleFilterChange}
-      />
+      <GameHud stats={stats} />
+
+      <div className="game-sidebar">
+        <QuestNavigation
+          activeFilter={activeFilter}
+          counts={counts}
+          onFilterChange={handleFilterChange}
+        />
+
+        <MascotGarden
+          mood={mascotMood}
+          animationKey={mascotAnimationKey}
+        />
+      </div>
 
       <GamePanel className="quest-board">
         <header className="board-header">
-          <div>
+          <div className="board-heading">
             <span className="board-eyebrow">
               Questwood Journal
             </span>
@@ -191,13 +243,6 @@ function QuestBoard() {
             </p>
           </div>
 
-          <div className="xp-display">
-            <span>Total earned</span>
-
-            <strong>
-              {stats.totalXp} XP
-            </strong>
-          </div>
         </header>
 
         <div className="progress-section">
@@ -292,6 +337,7 @@ function QuestBoard() {
             />
 
             <button type="submit">
+              <PixelIcon name="all" />
               Add quest
             </button>
           </div>
@@ -310,9 +356,14 @@ function QuestBoard() {
           </ul>
         ) : (
           <div className="empty-state">
-            <span aria-hidden="true">
-              🌱
-            </span>
+            <PixelIcon
+              name={
+                activeFilter === 'weekly'
+                  ? 'weekly'
+                  : 'today'
+              }
+              className="empty-state__icon"
+            />
 
             <p>
               {currentContent.emptyMessage}

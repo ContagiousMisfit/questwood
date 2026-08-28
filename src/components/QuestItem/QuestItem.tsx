@@ -1,4 +1,5 @@
 import type { Quest } from '../../types/quest'
+import PixelIcon from '../ui/PixelIcon/PixelIcon'
 import './QuestItem.scss'
 
 type QuestItemProps = {
@@ -26,15 +27,25 @@ function QuestItem({
         />
 
         <span className="checkbox" aria-hidden="true">
-          {quest.completed ? '✓' : ''}
+          {quest.completed ? (
+            <PixelIcon name="check" />
+          ) : null}
         </span>
 
         <span className="quest-title">
           {quest.title}
         </span>
 
-        <span className="quest-reward">
-          +{quest.xp} XP
+        <span className="quest-rewards">
+          <span className="quest-reward">
+            <PixelIcon name="xp" />
+            +{quest.xp}
+          </span>
+
+          <span className="quest-reward">
+            <PixelIcon name="coin" />
+            +{quest.coins ?? 0}
+          </span>
         </span>
       </label>
 
@@ -45,7 +56,7 @@ function QuestItem({
         title="Delete quest"
         onClick={() => onDelete(quest.id)}
       >
-        ×
+        <PixelIcon name="close" />
       </button>
     </li>
   )

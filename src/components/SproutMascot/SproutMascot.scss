@@ -1,0 +1,147 @@
+.sprout-mascot {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-width: 0;
+  padding-top: 8px;
+}
+
+.sprout-mascot__speech {
+  position: relative;
+
+  width: 100%;
+  max-width: 176px;
+  margin: 0;
+  padding: 9px 11px;
+
+  color: var(--color-ink);
+  background: var(--color-sprout-cream);
+  border: 2px solid var(--color-rose-500);
+  border-radius: var(--radius-medium);
+
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  line-height: 1.45;
+  text-align: center;
+
+  box-shadow: 0 5px 12px rgb(103 56 73 / 14%);
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: -7px;
+    left: calc(50% - 6px);
+
+    width: 12px;
+    height: 12px;
+
+    background: var(--color-sprout-cream);
+    border-top: 2px solid var(--color-rose-500);
+    border-left: 2px solid var(--color-rose-500);
+
+    transform: rotate(-45deg);
+  }
+}
+
+.sprout-mascot__stage {
+  position: relative;
+
+  width: 80px;
+  height: 94px;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.sprout-mascot__sprite {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+
+  display: block;
+  width: 32px;
+  height: 32px;
+
+  background-image: url('../../assets/sprout/teemo-emotes.png');
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+
+  transform: translateX(-50%) scale(2.75);
+  transform-origin: bottom center;
+}
+
+.sprout-mascot__sprite--idle {
+  background-position: 0 -64px;
+  animation: mascot-idle 1.15s steps(5) infinite;
+}
+
+.sprout-mascot__sprite--created {
+  background-position: 0 -160px;
+  animation: mascot-two-frames 520ms steps(2) 2;
+}
+
+.sprout-mascot__sprite--completed {
+  background-position: 0 -192px;
+  animation: mascot-two-frames 420ms steps(2) 3;
+}
+
+.sprout-mascot__sprite--removed {
+  background-position: 0 -288px;
+  animation: mascot-two-frames 420ms steps(2) 2;
+}
+
+.sprout-mascot--created,
+.sprout-mascot--completed {
+  .sprout-mascot__speech {
+    animation: mascot-speech-pop 320ms ease-out;
+  }
+}
+
+@keyframes mascot-idle {
+  to {
+    background-position-x: -160px;
+  }
+}
+
+@keyframes mascot-two-frames {
+  to {
+    background-position-x: -64px;
+  }
+}
+
+@keyframes mascot-speech-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(5px) scale(0.92);
+  }
+
+  70% {
+    transform: translateY(-2px) scale(1.03);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .sprout-mascot {
+    padding-top: 4px;
+  }
+
+  .sprout-mascot__speech {
+    max-width: 220px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sprout-mascot__sprite,
+  .sprout-mascot__speech {
+    animation: none !important;
+  }
+}

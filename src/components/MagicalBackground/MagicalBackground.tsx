@@ -1,4 +1,4 @@
-import gardenBackground from '../../assets/backgrounds/questwood-garden.jpg'
+import gardenBackground from '../../assets/backgrounds/cute-background2.jpg'
 
 import './MagicalBackground.scss'
 

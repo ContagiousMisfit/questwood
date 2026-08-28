@@ -3,65 +3,44 @@
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: stretch;
 
-  list-style: none;
   overflow: hidden;
+  list-style: none;
 
-  background:
-    linear-gradient(
-      180deg,
-      rgb(255 251 237 / 78%),
-      rgb(255 245 218 / 72%)
-    );
+  background: var(--color-sprout-cream-light);
+  border: 1px solid var(--color-rose-300);
+  border-radius: var(--radius-medium);
 
-  border: 1px solid rgb(105 83 58 / 34%);
-  border-radius: 14px;
-
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 70%),
-    0 4px 12px rgb(14 77 71 / 7%);
+  box-shadow: 0 5px 12px rgb(103 56 73 / 10%);
 
   transition:
-    transform 170ms ease,
-    background-color 170ms ease,
-    border-color 170ms ease,
-    box-shadow 170ms ease;
+    transform 100ms steps(2),
+    border-color 120ms ease,
+    background-color 120ms ease;
 
   &:hover {
+    border-color: var(--color-sprout-brown);
     transform: translateY(-1px);
-
-    border-color: rgb(23 105 95 / 34%);
-
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 78%),
-      0 7px 18px rgb(14 77 71 / 10%);
   }
 
   &:focus-within {
-    border-color: rgb(21 158 208 / 55%);
-
-    box-shadow:
-      0 0 0 3px rgb(21 158 208 / 10%),
-      0 5px 14px rgb(14 77 71 / 8%);
+    outline: 3px solid var(--color-sprout-gold);
+    outline-offset: 2px;
   }
 
   .quest-content {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
-    gap: 14px;
+    gap: 12px;
     align-items: center;
 
     min-width: 0;
-    padding: 15px 16px;
-
-    cursor: pointer;
+    padding: 12px 13px;
   }
 
   input {
     position: absolute;
-
     width: 1px;
     height: 1px;
-
     opacity: 0;
     pointer-events: none;
   }
@@ -71,208 +50,160 @@
     width: 29px;
     height: 29px;
     place-items: center;
-    flex-shrink: 0;
 
-    color: var(--color-forest-dark);
-    background-color: rgb(255 251 237 / 65%);
+    background: var(--color-sprout-cream);
+    border: 2px solid var(--color-rose-600);
+    border-radius: var(--radius-small);
 
-    border: 1px solid rgb(23 105 95 / 72%);
-    border-radius: 8px;
+    box-shadow: inset 0 0 0 2px rgb(255 255 255 / 36%);
 
-    box-shadow:
-      inset 0 1px 2px rgb(14 77 71 / 5%),
-      0 2px 5px rgb(14 77 71 / 5%);
-
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 700;
-
-    transition:
-      color 160ms ease,
-      background-color 160ms ease,
-      border-color 160ms ease,
-      transform 160ms ease,
-      box-shadow 160ms ease;
+    .pixel-icon {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   .quest-title {
     min-width: 0;
     overflow-wrap: anywhere;
 
-    color: var(--color-text);
+    color: var(--color-ink);
+    font-size: 0.98rem;
     font-weight: 800;
+  }
 
-    transition:
-      color 170ms ease,
-      opacity 170ms ease;
+  .quest-rewards {
+    display: flex;
+    gap: 5px;
   }
 
   .quest-reward {
-    padding: 4px 8px;
+    display: flex;
+    gap: 3px;
+    align-items: center;
 
-    color: var(--color-sky);
-    background-color: rgb(21 158 208 / 7%);
-    border-radius: 999px;
+    padding: 4px 5px;
 
-    font-family: var(--font-display);
-    font-size: 0.84rem;
-    font-weight: 700;
+    color: var(--color-sprout-plum);
+    background: rgb(255 205 201 / 58%);
+    border: 1px solid rgb(253 121 121 / 28%);
+    border-radius: var(--radius-small);
+
+    font-family: var(--font-ui);
+    font-size: 0.62rem;
+    line-height: 1.3;
     white-space: nowrap;
 
-    transition:
-      color 170ms ease,
-      background-color 170ms ease,
-      transform 170ms ease;
+    .pixel-icon {
+      width: 14px;
+      height: 14px;
+    }
   }
 
   .delete-button {
-    width: 46px;
+    display: grid;
+    width: 45px;
     padding: 0;
+    place-items: center;
 
-    color: var(--color-text-soft);
-    background-color: transparent;
-
+    background: rgb(255 205 201 / 36%);
     border: 0;
-    border-left: 1px solid rgb(105 83 58 / 18%);
+    border-left: 1px solid var(--color-rose-300);
 
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-      color 150ms ease,
-      background-color 150ms ease,
-      transform 150ms ease;
-
-    &:hover {
-      color: var(--color-danger);
-      background-color: rgb(201 101 90 / 9%);
+    .pixel-icon {
+      width: 18px;
+      height: 18px;
+      opacity: 0.72;
     }
 
-    &:active {
+    &:hover {
+      background: rgb(185 78 104 / 16%);
+
+      .pixel-icon {
+        opacity: 1;
+        transform: scale(1.12);
+      }
+    }
+
+    &:active .pixel-icon {
       transform: scale(0.9);
     }
 
     &:focus-visible {
-      outline: none;
-
-      color: var(--color-danger);
-      background-color: rgb(201 101 90 / 10%);
-
-      box-shadow: inset 0 0 0 2px
-        rgb(201 101 90 / 22%);
+      outline: 3px solid var(--color-sprout-gold);
+      outline-offset: -4px;
     }
   }
 
   &.completed {
-    background:
-      linear-gradient(
-        180deg,
-        rgb(168 215 84 / 20%),
-        rgb(222 212 91 / 13%)
-      );
+    background: rgb(255 205 201 / 72%);
+    border-color: var(--color-rose-500);
 
-    border-color: rgb(86 142 56 / 36%);
-
-    animation: quest-completed 440ms
-      cubic-bezier(0.2, 0.9, 0.3, 1.25);
+    animation: quest-completed 420ms steps(4);
 
     .checkbox {
-      color: var(--color-forest-dark);
-      background:
-        linear-gradient(
-          180deg,
-          var(--color-grass-light),
-          var(--color-sun-gold)
-        );
-
-      border-color: rgb(86 142 56 / 55%);
-
-      box-shadow:
-        0 0 0 3px rgb(168 215 84 / 12%),
-        0 4px 10px rgb(86 142 56 / 12%);
-
-      animation: check-pop 420ms ease;
+      background: var(--color-rose-300);
+      border-color: var(--color-rose-600);
+      animation: check-pop 360ms steps(4);
     }
 
     .quest-title {
-      color: var(--color-text-soft);
-      opacity: 0.72;
+      color: #866a76;
       text-decoration: line-through;
-      text-decoration-thickness: 1px;
+      text-decoration-thickness: 2px;
     }
 
     .quest-reward {
-      color: var(--color-meadow-dark);
-      background-color: rgb(168 215 84 / 14%);
-
-      animation: reward-pop 520ms ease;
+      background: rgb(253 172 172 / 44%);
+      border-color: rgb(253 121 121 / 30%);
+      animation: reward-pop 480ms steps(5);
     }
   }
 }
 
 @keyframes quest-completed {
-  0% {
-    transform: scale(1);
-  }
-
-  48% {
-    transform: scale(1.015);
-  }
-
-  100% {
-    transform: scale(1);
+  40% {
+    transform: scale(1.018);
   }
 }
 
 @keyframes check-pop {
-  0% {
-    transform: scale(0.65) rotate(-10deg);
-  }
-
-  60% {
-    transform: scale(1.15) rotate(4deg);
-  }
-
-  100% {
-    transform: scale(1) rotate(0);
+  50% {
+    transform: scale(1.2) rotate(5deg);
   }
 }
 
 @keyframes reward-pop {
   0% {
     opacity: 0;
-    transform: translateY(5px) scale(0.88);
+    transform: translateY(5px);
   }
 
-  65% {
-    opacity: 1;
-    transform: translateY(-2px) scale(1.06);
+  60% {
+    transform: translateY(-3px);
   }
 
   100% {
-    transform: translateY(0) scale(1);
+    opacity: 1;
+    transform: none;
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 560px) {
   .quest-item {
     .quest-content {
       grid-template-columns: auto minmax(0, 1fr);
-      gap: 11px;
-
-      padding: 14px 13px;
+      gap: 10px;
+      padding: 11px;
     }
 
-    .quest-reward {
+    .quest-rewards {
       grid-column: 2;
       justify-self: start;
     }
 
     .delete-button {
-      width: 44px;
+      width: 42px;
     }
   }
 }

@@ -1,6 +1,9 @@
 import type {
   QuestFilter,
 } from '../../types/quest'
+import PixelIcon, {
+  type PixelIconName,
+} from '../ui/PixelIcon/PixelIcon'
 
 import './QuestNavigation.scss'
 
@@ -17,22 +20,22 @@ type QuestNavigationProps = {
 const navigationItems: Array<{
   filter: QuestFilter
   label: string
-  icon: string
+  icon: PixelIconName
 }> = [
   {
     filter: 'daily',
     label: 'Today',
-    icon: '☀',
+    icon: 'today',
   },
   {
     filter: 'weekly',
     label: 'This Week',
-    icon: '❀',
+    icon: 'weekly',
   },
   {
     filter: 'all',
     label: 'All Goals',
-    icon: '✦',
+    icon: 'all',
   },
 ]
 
@@ -69,7 +72,7 @@ function QuestNavigation({
                 className="quest-navigation__icon"
                 aria-hidden="true"
               >
-                {icon}
+                <PixelIcon name={icon} />
               </span>
 
               <span className="quest-navigation__label">
