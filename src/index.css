@@ -1,0 +1,27 @@
+:root {
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #352f24;
+  background-color: #dce8ca;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
