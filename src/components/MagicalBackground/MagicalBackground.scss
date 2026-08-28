@@ -1,0 +1,188 @@
+.magical-background {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+
+  overflow: hidden;
+  pointer-events: none;
+  background-color: var(--forest-950);
+
+  .garden-background {
+    position: absolute;
+    inset: -2%;
+
+    width: 104%;
+    height: 104%;
+    object-fit: cover;
+    object-position: center;
+
+    animation: garden-breathe 18s ease-in-out infinite alternate;
+  }
+
+  .ambient-light {
+    position: absolute;
+    top: -20%;
+    left: 30%;
+
+    width: 60%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        circle,
+        rgb(212 209 108 / 24%),
+        transparent 68%
+      );
+
+    animation: light-pulse 7s ease-in-out infinite;
+  }
+
+  .background-veil {
+    position: absolute;
+    inset: 0;
+
+    background:
+      linear-gradient(
+        90deg,
+        rgb(38 59 79 / 26%),
+        rgb(38 59 79 / 4%) 38%,
+        rgb(38 59 79 / 4%) 62%,
+        rgb(38 59 79 / 24%)
+      );
+  }
+
+  .light-motes {
+    position: absolute;
+    inset: 0;
+
+    span {
+      position: absolute;
+
+      width: 5px;
+      height: 5px;
+
+      background-color: var(--sunlit-leaf);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgb(212 209 108 / 75%);
+
+      opacity: 0;
+      animation: mote-float 7s ease-in-out infinite;
+    }
+
+    span:nth-child(1) {
+      top: 20%;
+      left: 8%;
+    }
+
+    span:nth-child(2) {
+      top: 35%;
+      left: 19%;
+      animation-delay: -2s;
+    }
+
+    span:nth-child(3) {
+      top: 62%;
+      left: 10%;
+      animation-delay: -5s;
+    }
+
+    span:nth-child(4) {
+      top: 75%;
+      left: 22%;
+      animation-delay: -3s;
+    }
+
+    span:nth-child(5) {
+      top: 14%;
+      left: 76%;
+      animation-delay: -4s;
+    }
+
+    span:nth-child(6) {
+      top: 29%;
+      left: 91%;
+      animation-delay: -1s;
+    }
+
+    span:nth-child(7) {
+      top: 54%;
+      left: 84%;
+      animation-delay: -6s;
+    }
+
+    span:nth-child(8) {
+      top: 81%;
+      left: 92%;
+      animation-delay: -2.5s;
+    }
+
+    span:nth-child(9) {
+      top: 45%;
+      left: 4%;
+      animation-delay: -1.5s;
+    }
+
+    span:nth-child(10) {
+      top: 68%;
+      left: 96%;
+      animation-delay: -4.5s;
+    }
+  }
+}
+
+@keyframes garden-breathe {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.025);
+  }
+}
+
+@keyframes light-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes mote-float {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate(0, 12px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(8px, -12px);
+  }
+}
+
+@media (max-width: 640px) {
+  .magical-background {
+    .garden-background {
+      // No mobile, as laterais serão cortadas.
+      // Mantemos fonte e área iluminada visíveis.
+      object-position: 48% center;
+    }
+
+    .background-veil {
+      background-color: rgb(38 59 79 / 16%);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .magical-background * {
+    animation: none !important;
+  }
+}

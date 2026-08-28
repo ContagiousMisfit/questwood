@@ -1,7 +1,45 @@
 :root {
-  font-family: Georgia, 'Times New Roman', serif;
-  color: #352f24;
-  background-color: #dce8ca;
+  // Typography
+  --font-display: 'Pixelify Sans', sans-serif;
+  --font-body: 'Nunito', sans-serif;
+
+  // Garden palette
+  --color-night: #263b4f;
+  --color-slate: #334d62;
+  --color-garden-blue: #365c8f;
+  --color-violet: #43364e;
+  --color-stone: #536168;
+  --color-blue-soft: #58698d;
+  --color-mist: #6a8799;
+  --color-sage: #758666;
+  --color-wood: #8a7570;
+  --color-moss: #9c9f68;
+  --color-warm-stone: #c0bf9c;
+  --color-leaf-gold: #d4d16c;
+
+  // Interface colors
+  --color-panel: #f1e8c7;
+  --color-panel-highlight: #fff7db;
+  --color-panel-muted: #e3ddbd;
+
+  --color-primary: #365c8f;
+  --color-primary-hover: #334d62;
+
+  --color-text: #263b4f;
+  --color-text-soft: #536168;
+
+  --color-border: #8a7570;
+  --color-border-dark: #43364e;
+
+  // Shape
+  --radius-small: 8px;
+  --radius-medium: 12px;
+  --radius-large: 18px;
+
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-night);
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
@@ -24,4 +62,26 @@ body {
 button,
 input {
   font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+}
+
+::selection {
+  color: var(--color-panel-highlight);
+  background-color: var(--color-garden-blue);
 }
