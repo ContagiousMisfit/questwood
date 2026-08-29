@@ -1,8 +1,11 @@
 import MagicalBackground from './components/MagicalBackground/MagicalBackground'
 import QuestBoard from './components/QuestBoard/QuestBoard'
+import useInterfaceSounds from './hooks/useInterfaceSounds'
 import './App.scss'
 
 function App() {
+  useInterfaceSounds()
+
   return (
     <main className="app">
       <MagicalBackground />

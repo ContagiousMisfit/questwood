@@ -1,8 +1,17 @@
 import gardenBackground from '../../assets/backgrounds/cute-background2.jpg'
+import { useEffect, useState } from 'react'
 
 import './MagicalBackground.scss'
 
 function MagicalBackground() {
+  const [celebrationKey, setCelebrationKey] = useState(0)
+
+  useEffect(() => {
+    const celebrate = () => setCelebrationKey((key) => key + 1)
+    window.addEventListener('questwood:celebrate', celebrate)
+    return () => window.removeEventListener('questwood:celebrate', celebrate)
+  }, [])
+
   return (
     <div
       className="magical-background"
@@ -40,6 +49,12 @@ function MagicalBackground() {
           <span key={`petal-${index}`} />
         ))}
       </div>
+
+      {celebrationKey > 0 ? (
+        <div className="completion-burst" key={celebrationKey}>
+          {Array.from({ length: 22 }, (_, index) => <span key={index} />)}
+        </div>
+      ) : null}
     </div>
   )
 }

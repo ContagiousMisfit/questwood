@@ -1,5 +1,25 @@
 # React + TypeScript + Vite
 
+Questwood is a cozy, pixel-art quest journal built with React, TypeScript,
+Vite, and Sass. Add daily or weekly quests, earn XP and coins, build a
+streak, and celebrate progress with an animated garden companion.
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+Use `npm run lint` and `npm run build` before committing changes.
+
+## Asset credits
+
+Sprout Lands assets by [Cup Nooble](https://cupnooble.itch.io/). Used and
+modified under the license included with the asset pack. These assets are
+licensed for non-commercial projects and must not be redistributed or
+resold as a standalone asset pack.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

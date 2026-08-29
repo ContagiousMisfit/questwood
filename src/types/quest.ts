@@ -5,6 +5,12 @@ export type QuestPeriod =
 export type QuestFilter =
   | QuestPeriod
   | 'all'
+  | 'archive'
+  | 'priority'
+  | 'tomorrow'
+  | 'completed'
+
+export type QuestPriority = 'normal' | 'high' | 'urgent'
 
 export type Quest = {
   id: string
@@ -15,6 +21,10 @@ export type Quest = {
   coins?: number
   createdAt?: string
   completedAt?: string | null
+  claimedAt?: string | null
+  deletedAt?: string | null
+  priority?: QuestPriority
+  scheduledFor?: string | null
 }
 
 export type PlayerStats = {

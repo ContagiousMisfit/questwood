@@ -14,11 +14,8 @@ function GameHud({ stats }: GameHudProps) {
   )
 
   return (
-    <section
-      className="game-hud"
-      aria-label="Player progress"
-    >
-      <div className="game-hud__brand">
+    <>
+      <header className="questwood-brand">
         <span className="game-hud__brand-leaf">
           ✦
         </span>
@@ -27,7 +24,12 @@ function GameHud({ stats }: GameHudProps) {
           <strong>Questwood</strong>
           <span>Little quests, growing magic</span>
         </div>
-      </div>
+      </header>
+
+      <section
+        className="game-hud"
+        aria-label="Player progress"
+      >
 
       <div className="game-hud__level">
         <span className="game-hud__level-badge">
@@ -63,19 +65,20 @@ function GameHud({ stats }: GameHudProps) {
       </div>
 
       <div className="game-hud__resources">
-        <div className="game-hud__resource">
+        <div className="game-hud__resource" title="Spend coins to invite new garden pets">
           <PixelIcon name="coin" />
           <span>Coins</span>
           <strong>{stats.coins}</strong>
         </div>
 
-        <div className="game-hud__resource">
+        <div className="game-hud__resource" title="Complete at least one quest each day to keep your streak">
           <PixelIcon name="streak" />
           <span>Streak</span>
           <strong>{stats.streak}d</strong>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   )
 }
 

@@ -5,13 +5,13 @@
   width: 100%;
   padding: 10px;
 
-  background: rgb(254 234 201 / 95%);
-  border: 2px solid var(--color-rose-600);
+  background: rgb(255 250 245 / 96%);
+  border: 1px solid var(--color-rose-300);
   border-radius: var(--radius-large);
 
   box-shadow:
-    inset 0 0 0 4px rgb(255 205 201 / 72%),
-    0 14px 32px rgb(67 47 56 / 18%);
+    inset 0 1px 0 rgb(255 255 255 / 80%),
+    0 12px 28px rgb(67 47 56 / 14%);
 }
 
 .quest-navigation__item {
@@ -25,7 +25,7 @@
   padding: 7px 9px;
 
   color: var(--color-sprout-brown);
-  background: rgb(255 205 201 / 50%);
+  background: transparent;
   border: 2px solid transparent;
   border-radius: var(--radius-medium);
 

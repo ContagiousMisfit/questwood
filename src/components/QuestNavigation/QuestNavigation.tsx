@@ -37,6 +37,26 @@ const navigationItems: Array<{
     label: 'All Goals',
     icon: 'all',
   },
+  {
+    filter: 'tomorrow',
+    label: 'Tomorrow',
+    icon: 'today',
+  },
+  {
+    filter: 'priority',
+    label: 'Priorities',
+    icon: 'xp',
+  },
+  {
+    filter: 'archive',
+    label: 'Trash',
+    icon: 'close',
+  },
+  {
+    filter: 'completed',
+    label: 'Completed',
+    icon: 'check',
+  },
 ]
 
 function QuestNavigation({

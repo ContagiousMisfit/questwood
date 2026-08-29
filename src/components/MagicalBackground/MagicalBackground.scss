@@ -21,8 +21,8 @@
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 
-  filter: brightness(1.07) saturate(0.86) contrast(1.1);
-  animation: pixel-landscape-drift 28s steps(28) infinite alternate;
+  opacity: 1;
+  animation: pixel-landscape-drift 48s steps(36) infinite alternate;
 }
 
 .background-shade {
@@ -31,14 +31,19 @@
   inset: 0;
 
   background:
+    radial-gradient(
+      circle at 50% 42%,
+      rgb(254 234 201 / 18%) 0 24%,
+      rgb(112 55 68 / 22%) 100%
+    ),
     linear-gradient(
       180deg,
-      rgb(255 205 201 / 38%),
-      rgb(254 234 201 / 8%) 46%,
-      rgb(253 121 121 / 20%) 100%
+      rgb(254 234 201 / 34%),
+      rgb(255 205 201 / 22%) 52%,
+      rgb(112 55 68 / 18%) 100%
     );
 
-  mix-blend-mode: soft-light;
+  mix-blend-mode: normal;
 }
 
 .cloud-glow {
@@ -46,7 +51,7 @@
   z-index: 2;
   inset: 0;
   mix-blend-mode: screen;
-  opacity: 0.45;
+  opacity: 0.25;
 
   span {
     position: absolute;
@@ -59,7 +64,7 @@
     background: rgb(254 234 201 / 12%);
     filter: blur(10px);
 
-    animation: pixel-cloud-drift 17s ease-in-out infinite alternate;
+    animation: pixel-cloud-drift 32s ease-in-out infinite alternate;
   }
 
   span:last-child {
@@ -68,7 +73,7 @@
     left: auto;
 
     width: 180px;
-    opacity: 0.65;
+    opacity: 0.42;
     animation-delay: -8s;
   }
 }
@@ -87,15 +92,41 @@
     );
 
   mix-blend-mode: screen;
-  animation: pixel-sun-pulse 8s steps(6) infinite alternate;
+  opacity: 0.42;
+  animation: pixel-sun-pulse 14s steps(8) infinite alternate;
 }
 
 .light-motes,
 .floating-leaves,
-.floating-petals {
+.floating-petals,
+.completion-burst {
   position: absolute;
   z-index: 3;
   inset: 0;
+}
+
+.completion-burst span {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  background: var(--color-rose-100);
+  border: 1px solid var(--color-rose-400);
+  opacity: 0;
+  animation: completion-spark 1.8s ease-out forwards;
+  @for $index from 1 through 22 {
+    &:nth-child(#{$index}) {
+      --spark-x: #{(($index % 7) - 3) * 55}px;
+      --spark-y: #{-80 - (($index % 5) * 42)}px;
+      animation-delay: #{($index % 6) * .04}s;
+    }
+  }
+}
+
+@keyframes completion-spark {
+  10% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--spark-x), var(--spark-y)) rotate(260deg) scale(.35); }
 }
 
 .light-motes span {
@@ -111,13 +142,13 @@
     0 0 8px var(--color-rose-100);
 
   opacity: 0;
-  animation: pixel-mote-rise 10s steps(12) infinite;
+  animation: pixel-mote-rise 18s steps(18) infinite;
 
   @for $index from 1 through 14 {
     &:nth-child(#{$index}) {
       left: (3% + ($index * 6.6%));
       animation-delay: ($index * -0.83s);
-      animation-duration: (8s + (($index % 5) * 1.2s));
+      animation-duration: (15s + (($index % 5) * 1.8s));
     }
   }
 }
@@ -135,13 +166,13 @@
   border-radius: 8px 1px 8px 1px;
 
   opacity: 0;
-  animation: pixel-leaf-flight 15s steps(18) infinite;
+  animation: pixel-leaf-flight 25s steps(24) infinite;
 
   @for $index from 1 through 7 {
     &:nth-child(#{$index}) {
       top: (7% + ($index * 11%));
       animation-delay: ($index * -2.15s);
-      animation-duration: (13s + (($index % 4) * 2s));
+      animation-duration: (22s + (($index % 4) * 3s));
     }
   }
 }
@@ -158,13 +189,13 @@
   border-radius: 6px 2px 6px 2px;
 
   opacity: 0;
-  animation: pixel-petal-fall 13s steps(16) infinite;
+  animation: pixel-petal-fall 22s steps(22) infinite;
 
   @for $index from 1 through 6 {
     &:nth-child(#{$index}) {
       left: (8% + ($index * 14%));
       animation-delay: ($index * -1.75s);
-      animation-duration: (11s + (($index % 3) * 2s));
+      animation-duration: (19s + (($index % 3) * 3s));
     }
   }
 }
@@ -207,7 +238,7 @@
 
   14%,
   75% {
-    opacity: 0.85;
+    opacity: 0.48;
   }
 
   100% {
@@ -224,7 +255,7 @@
 
   10%,
   80% {
-    opacity: 0.7;
+    opacity: 0.4;
   }
 
   100% {
@@ -241,7 +272,7 @@
 
   10%,
   82% {
-    opacity: 0.72;
+    opacity: 0.48;
   }
 
   100% {

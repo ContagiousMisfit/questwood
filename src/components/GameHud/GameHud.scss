@@ -2,22 +2,64 @@
   grid-column: 1 / -1;
 
   display: grid;
-  grid-template-columns: minmax(190px, 1fr) minmax(260px, 1.25fr) auto;
-  gap: 18px;
+  grid-template-columns: minmax(260px, 1fr) auto;
+  gap: 14px;
   align-items: center;
 
   padding: 12px 15px;
 
   color: var(--color-ink);
-  background: rgb(254 234 201 / 95%);
-  border: 2px solid var(--color-rose-600);
+  background: rgb(255 250 245 / 96%);
+  border: 1px solid var(--color-rose-300);
   border-radius: var(--radius-large);
 
   box-shadow:
-    inset 0 0 0 4px rgb(255 205 201 / 72%),
-    0 14px 32px rgb(67 47 56 / 18%);
+    inset 0 1px 0 rgb(255 255 255 / 80%),
+    0 12px 28px rgb(67 47 56 / 14%);
 
   image-rendering: pixelated;
+}
+
+.questwood-brand {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 4px 7px 7px;
+  color: var(--color-rose-50);
+  text-shadow: 0 2px 12px rgb(75 45 53 / 45%);
+
+  div { flex: 1; }
+  strong, span { display: block; }
+  strong {
+    font-family: var(--font-ui);
+    font-size: clamp(1.75rem, 4vw, 2.7rem);
+    line-height: .95;
+    letter-spacing: .025em;
+  }
+  div > span {
+    margin-top: 8px;
+    font-size: .78rem;
+    font-weight: 900;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+  .game-hud__brand-leaf {
+    width: 52px;
+    height: 52px;
+    background: var(--color-rose-600);
+    box-shadow: 0 5px 0 var(--color-plum-900);
+  }
+}
+
+.questwood-brand__edition {
+  padding: 7px 10px;
+  border: 1px solid rgb(255 250 245 / 45%);
+  border-radius: 999px;
+  background: rgb(75 45 53 / 34%);
+  font-family: var(--font-ui);
+  font-size: .62rem;
+  letter-spacing: .05em;
 }
 
 .game-hud__brand {
@@ -66,7 +108,10 @@
   grid-template-columns: auto minmax(0, 1fr);
   gap: 10px;
   align-items: center;
+  min-width: 0;
 }
+
+.game-hud__xp { min-width: 0; }
 
 .game-hud__level-badge {
   display: grid;
@@ -129,39 +174,44 @@
 .game-hud__resources {
   display: flex;
   gap: 8px;
+  flex: 0 0 auto;
 }
 
 .game-hud__resource {
   display: grid;
-  grid-template-columns: 20px auto;
-  gap: 0 7px;
-  align-items: center;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  gap: 1px 7px;
+  align-content: center;
+  width: 88px;
+  aspect-ratio: 1;
+  padding: 10px;
 
-  min-width: 82px;
-  padding: 7px 9px;
-
-  background: var(--color-rose-50);
-  border: 1px solid var(--color-rose-300);
+  background: var(--color-rose-100);
+  border: 1px solid rgb(233 99 112 / 28%);
   border-radius: var(--radius-medium);
 
   .pixel-icon {
     grid-row: 1 / 3;
-    width: 20px;
-    height: 20px;
+    align-self: start;
+    width: 23px;
+    height: 23px;
   }
 
   span {
     color: var(--color-sprout-brown);
-    font-size: 0.66rem;
+    font-size: 0.62rem;
     font-weight: 900;
+    letter-spacing: .04em;
     text-transform: uppercase;
   }
 
   strong {
     color: var(--color-sprout-plum);
     font-family: var(--font-ui);
-    font-size: 0.84rem;
+    font-size: 1.12rem;
   }
+
 }
 
 @media (max-width: 800px) {
@@ -169,16 +219,14 @@
     grid-template-columns: minmax(0, 1fr) auto;
   }
 
-  .game-hud__brand {
-    display: none;
-  }
 }
 
 @media (max-width: 560px) {
+  .questwood-brand__edition { display: none; }
   .game-hud {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 10px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+    padding: 9px;
   }
 
   .game-hud__resources {
@@ -187,8 +235,25 @@
   }
 
   .game-hud__resource {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    width: 62px;
     min-width: 0;
+    padding: 6px 4px;
+
+    span { grid-row: 2; font-size: .48rem; line-height: 1; }
+    strong { grid-row: 3; font-size: .8rem; }
+    .pixel-icon { grid-row: 1; width: 17px; height: 17px; }
   }
+}
+
+@media (max-width: 420px) {
+  .game-hud { grid-template-columns: minmax(0, 1fr) auto; }
+  .game-hud__level { grid-template-columns: auto minmax(0, 1fr); gap: 7px; }
+  .game-hud__level-badge { min-width: 44px; min-height: 30px; }
+  .game-hud__resources { gap: 5px; }
+  .game-hud__resource { width: 57px; }
+  .game-hud__xp-label { font-size: .67rem; strong { font-size: .58rem; } }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -36,6 +36,7 @@ function MascotGarden({
       <p className="mascot-garden__hint">
         Complete quests to make Teemo celebrate!
       </p>
+
     </section>
   )
 }

@@ -1,6 +1,6 @@
 .quest-item {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: 25px minmax(0, 1fr) auto;
   align-items: stretch;
 
   overflow: hidden;
@@ -22,10 +22,17 @@
     transform: translateY(-1px);
   }
 
+  &:not(.completed) { cursor: grab; }
+  &:not(.completed):active { cursor: grabbing; }
+
   &:focus-within {
     outline: 3px solid var(--color-sprout-gold);
     outline-offset: 2px;
   }
+
+  &.dragging { opacity: .42; transform: scale(.985); }
+  &.priority-high { border-left: 3px solid var(--color-rose-400); }
+  &.priority-urgent { border-left: 3px solid var(--color-rose-700); }
 
   .quest-content {
     display: grid;
@@ -100,7 +107,7 @@
     }
   }
 
-  .delete-button {
+  .quest-action-button {
     display: grid;
     width: 45px;
     padding: 0;
@@ -130,9 +137,45 @@
     }
 
     &:focus-visible {
-      outline: 3px solid var(--color-sprout-gold);
+      outline: 3px solid var(--color-rose-300);
       outline-offset: -4px;
     }
+  }
+
+  .claim-button {
+    grid-template-columns: auto auto;
+    gap: 5px;
+    width: auto;
+    min-width: 82px;
+    padding: 0 10px;
+
+    color: var(--color-rose-50);
+    background: linear-gradient(180deg, var(--color-rose-500), var(--color-rose-600));
+    border-left-color: var(--color-rose-600);
+
+    font-family: var(--font-ui);
+    font-size: 0.74rem;
+
+    .pixel-icon {
+      opacity: 1;
+    }
+
+    &:hover {
+      background: var(--color-rose-700);
+    }
+  }
+
+  .quest-actions { display: flex; align-items: stretch; }
+
+  .tomorrow-button {
+    display: flex;
+    gap: 5px;
+    width: auto;
+    padding: 0 9px;
+    color: var(--color-rose-700);
+    font-family: var(--font-ui);
+    font-size: .61rem;
+    .pixel-icon { opacity: 1; }
   }
 
   &.completed {
@@ -159,6 +202,54 @@
       animation: reward-pop 480ms steps(5);
     }
   }
+}
+
+.quest-drag-handle {
+  display: grid;
+  place-items: center;
+  color: var(--color-rose-600);
+  background: rgb(255 205 201 / 35%);
+  border-right: 1px solid var(--color-rose-200);
+  font-weight: 900;
+  letter-spacing: -3px;
+  user-select: none;
+  cursor: grab;
+  &:active { cursor: grabbing; }
+}
+
+.quest-priority {
+  display: inline-block;
+  margin-left: 7px;
+  padding: 2px 5px;
+  color: var(--color-rose-700);
+  background: var(--color-rose-200);
+  border-radius: 999px;
+  font-size: .56rem;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.quest-priority-editor {
+  width: auto;
+  margin-left: 7px;
+  padding: 2px 18px 2px 5px;
+  color: var(--color-text-soft);
+  background: var(--color-rose-100);
+  border: 1px solid var(--color-rose-300);
+  border-radius: 999px;
+  font-size: .58rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  vertical-align: middle;
+  &.priority-high { color: var(--color-rose-600); }
+  &.priority-urgent { color: var(--color-rose-50); background: var(--color-rose-700); }
+}
+
+.quest-scheduled {
+  color: var(--color-text-soft);
+  background: var(--color-rose-100);
 }
 
 @keyframes quest-completed {
@@ -202,8 +293,19 @@
       justify-self: start;
     }
 
-    .delete-button {
+    .quest-action-button {
       width: 42px;
+    }
+
+    .claim-button {
+      width: auto;
+      min-width: 76px;
+    }
+
+    .tomorrow-button {
+      width: 42px;
+      padding: 0;
+      span { display: none; }
     }
   }
 }

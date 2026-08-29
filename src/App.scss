@@ -22,10 +22,7 @@
 
   background-color: var(--color-plum-800);
 
-  .quest-board,
-  .game-shell {
-    margin-block: auto;
-  }
+  .game-shell { margin-block: 0; }
 }
 
 @media (max-width: 700px) {

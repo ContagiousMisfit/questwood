@@ -41,7 +41,7 @@
   --color-danger: #b94e68;
   --color-ink: var(--color-plum-900);
   --color-text: var(--color-ink);
-  --color-text-soft: #74545d;
+  --color-text-soft: #765c64;
   --color-primary: var(--color-sprout-green-dark);
   --color-primary-hover: var(--color-rose-700);
   --color-accent: var(--color-sprout-pink);
@@ -137,6 +137,10 @@ h3 {
   font-family: var(--font-ui);
   font-weight: 400;
 }
+
+h1 { letter-spacing: -0.015em; }
+
+p { color: var(--color-text-soft); }
 
 button {
   font-weight: 800;
