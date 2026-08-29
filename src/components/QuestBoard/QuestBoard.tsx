@@ -603,7 +603,7 @@ function QuestBoard() {
               ) : activeFilter === 'completed' ? (
                 <li className="completed-quest" key={quest.id}>
                   <PixelIcon name="check" />
-                  <div><strong>{quest.title}</strong><span>{quest.period === 'weekly' ? 'Weekly' : 'Daily'} · +{quest.xp} XP claimed</span></div>
+                  <div><strong>{quest.title}</strong><span>{quest.period === 'weekly' ? 'Weekly' : 'Daily'} · +{quest.xp} XP · +{quest.coins ?? 0} coins claimed</span></div>
                 </li>
               ) : (
                 <QuestItem

@@ -43,22 +43,6 @@
   p { margin: 0; color: var(--color-text-soft); font-size: .82rem; font-weight: 700; }
 }
 
-.growth-garden__scenery {
-  display: flex;
-  flex: 0 0 auto;
-  gap: 8px;
-  align-items: end;
-  opacity: .82;
-
-  img {
-    width: 44px;
-    height: 44px;
-    object-fit: contain;
-    image-rendering: pixelated;
-    filter: drop-shadow(0 4px 4px rgb(67 47 56 / 14%));
-  }
-}
-
 .growth-garden__eyebrow {
   color: var(--color-rose-600);
   font-family: var(--font-ui);
@@ -131,7 +115,8 @@
   height: 48px;
   margin-bottom: 0;
   background-repeat: no-repeat;
-  background-size: 288px 96px;
+  background-position: center;
+  background-size: contain;
   image-rendering: pixelated;
   animation: plant-grow 1.8s steps(6);
 }
@@ -144,18 +129,16 @@
   &:nth-child(3) { animation-delay: .2s; }
   &:nth-child(4) { animation-delay: .3s; }
 }
-@for $stage from 0 through 5 {
-  .garden-plant--#{$stage} { background-position: -#{$stage * 48}px 0; }
-}
+.garden-plant--0 { opacity: .2; transform: scale(.42); filter: grayscale(1); }
+.garden-plant--1 { opacity: .42; transform: scale(.56); filter: grayscale(.7); }
+.garden-plant--2 { opacity: .6; transform: scale(.68); filter: saturate(.7); }
+.garden-plant--3 { opacity: .78; transform: scale(.82); }
+.garden-plant--4 { transform: scale(.94); filter: brightness(1.05); }
 
 .final-plant {
-  background-size: 432px 240px;
+  background-size: contain;
   animation: final-bloom 1.2s steps(7);
 }
-.final-plant--0 { background-position: -144px -48px; }
-.final-plant--1 { background-position: -240px 0; }
-.final-plant--2 { background-position: -240px -96px; }
-.final-plant--3 { background-position: -336px -144px; }
 
 .garden-pets {
   display: flex;
@@ -179,22 +162,14 @@
   image-rendering: pixelated;
 }
 
-.garden-pet.chicken {
-  background-size: 192px 96px;
-  background-position: 0 0;
-  animation: pet-bob 3.4s ease-in-out infinite;
+.garden-pet.ghibli-companion {
+  background-position: center;
+  background-size: contain;
 }
-.garden-pet.cow {
-  background-size: 144px 96px;
-  animation: cow-walk 1.4s steps(3) infinite, pet-bob 3.2s steps(4) infinite;
-}
-.garden-pet.rabbit,
-.garden-pet.cat {
-  background-size: 400% auto;
-  background-position: 0 50%;
-  animation: generated-pet-idle 1.9s steps(1) infinite;
-}
-.garden-pet.cat { animation-duration: 2.2s; }
+.garden-pet.jiji { animation: jiji-play 2.3s ease-in-out infinite; }
+.garden-pet.soot-sprite { animation: soot-scurry 1.15s steps(4) infinite; }
+.garden-pet.teto { animation: teto-hop 1.8s ease-in-out infinite; }
+.garden-pet.kiki { animation: kiki-flight 3.2s ease-in-out infinite; }
 
 .garden-pets__invite {
   position: relative;
@@ -248,17 +223,22 @@
 @keyframes garden-complete-pop { 45% { transform: translateY(-7px) scale(1.04); filter: brightness(1.12); } }
 @keyframes invite-pet { 50% { transform: translateY(-4px) rotate(-3deg); } }
 @keyframes pet-bob { 50% { transform: translateY(-4px); } }
-@keyframes cow-walk { to { background-position-x: -144px; } }
-@keyframes generated-pet-idle {
-  0%, 46% { background-position-x: 0; }
-  47%, 58% { background-position-x: 33.333%; }
-  59%, 78% { background-position-x: 66.666%; }
-  79%, 100% { background-position-x: 100%; }
-}
+@keyframes jiji-play { 40% { transform: translateY(-4px) rotate(-4deg); } 55% { transform: translateY(-2px) rotate(4deg); } }
+@keyframes soot-scurry { 25% { transform: translate(-2px, -2px) rotate(-5deg); } 50% { transform: translate(2px, 0) rotate(5deg); } 75% { transform: translate(-1px, 2px); } }
+@keyframes teto-hop { 45% { transform: translateY(-8px) scale(1.05); } 60% { transform: translateY(-5px) rotate(3deg); } }
+@keyframes kiki-flight { 25% { transform: translate(3px, -5px) rotate(2deg); } 60% { transform: translate(-3px, -8px) rotate(-2deg); } }
+
+.floating-companion:hover .garden-pet.jiji { animation: jiji-hover .5s ease-in-out infinite alternate; }
+.floating-companion:hover .garden-pet.soot-sprite { animation: soot-hover .32s steps(3) infinite; }
+.floating-companion:hover .garden-pet.teto { animation: teto-hover .55s ease-in-out infinite alternate; }
+.floating-companion:hover .garden-pet.kiki { animation: kiki-hover .8s ease-in-out infinite alternate; }
+@keyframes jiji-hover { to { transform: translateY(-7px) scale(1.1) rotate(6deg); } }
+@keyframes soot-hover { to { transform: rotate(15deg) scale(1.12); filter: brightness(1.18); } }
+@keyframes teto-hover { to { transform: translateY(-9px) rotate(-5deg) scale(1.08); } }
+@keyframes kiki-hover { to { transform: translate(5px, -8px) rotate(4deg) scale(1.06); } }
 
 @media (max-width: 650px) {
   .growth-garden__header { align-items: flex-start; }
-  .growth-garden__scenery img { width: 34px; height: 34px; }
   .growth-garden__plots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .garden-pets { margin: 16px -18px -18px; padding: 12px 18px 15px; }
   .garden-pets__copy { display: none; }

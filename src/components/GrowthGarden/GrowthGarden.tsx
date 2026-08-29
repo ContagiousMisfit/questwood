@@ -1,12 +1,12 @@
 import { useEffect, useState, type PointerEvent } from 'react'
-import plantSprites from '../../assets/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Objects/Basic Plants.png'
-import finalPlantSprites from '../../assets/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Objects/Basic_Grass_Biom_things.png'
-import chickenSprites from '../../assets/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Characters/Free Chicken Sprites.png'
-import cowSprites from '../../assets/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Characters/Free Cow Sprites.png'
-import rabbitSprites from '../../assets/generated/rabbit-companion.png'
-import catSprites from '../../assets/generated/cat-companion.png'
-import chickenHouse from '../../assets/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Objects/Free_Chicken_House.png'
-import chest from '../../assets/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Objects/Chest.png'
+import jijiSprite from '../../assets/generated/companions/companion-0.png'
+import sootSprite from '../../assets/generated/companions/companion-1.png'
+import tetoSprite from '../../assets/generated/companions/companion-2.png'
+import kikiSprite from '../../assets/generated/companions/companion-3.png'
+import kodamaSprite from '../../assets/generated/garden/reference-0.png'
+import calciferSprite from '../../assets/generated/garden/reference-1.png'
+import turnipSprite from '../../assets/generated/garden/reference-2.png'
+import robotSprite from '../../assets/generated/garden/reference-3.png'
 import PixelIcon from '../ui/PixelIcon/PixelIcon'
 import './GrowthGarden.scss'
 
@@ -22,12 +22,13 @@ type GrowthGardenProps = {
   onUnlockPet: () => void
 }
 
-const plots = ['Rosebud', 'Moonleaf', 'Starroot', 'Honeyfern']
+const plots = ['Kodama Grove', 'Calcifer Hearth', 'Turnip Patch', 'Laputa Garden']
+const gardenReferences = [kodamaSprite, calciferSprite, turnipSprite, robotSprite]
 const companions = [
-  { kind: 'chicken', sprite: chickenSprites, name: 'Chicken' },
-  { kind: 'cow', sprite: cowSprites, name: 'Cow' },
-  { kind: 'rabbit', sprite: rabbitSprites, name: 'Woodland rabbit' },
-  { kind: 'cat', sprite: catSprites, name: 'Garden cat' },
+  { kind: 'ghibli-companion jiji', sprite: jijiSprite, name: 'Jiji' },
+  { kind: 'ghibli-companion soot-sprite', sprite: sootSprite, name: 'Soot sprite' },
+  { kind: 'ghibli-companion teto', sprite: tetoSprite, name: 'Teto' },
+  { kind: 'ghibli-companion kiki', sprite: kikiSprite, name: 'Kiki' },
 ]
 
 function GrowthGarden({
@@ -128,10 +129,6 @@ function GrowthGarden({
           <h2 id="growth-garden-title">The Growing Grove</h2>
           <p>New quests grow plants. Mature plants can be harvested.</p>
         </div>
-        <div className="growth-garden__scenery" aria-hidden="true">
-          <img src={chest} alt="" />
-          <img src={chickenHouse} alt="" />
-        </div>
       </header>
 
       <div className={`growth-garden__plots ${completionKey > 0 ? 'garden-complete' : ''}`} key={`garden-${animationKey}-${completionKey}`}>
@@ -151,7 +148,7 @@ function GrowthGarden({
               >
                 <span
                   className={`garden-plant garden-plant--${stage} ${stage === 5 ? `final-plant final-plant--${index}` : ''}`}
-                  style={{ backgroundImage: `url(${stage === 5 ? finalPlantSprites : plantSprites})` }}
+                  style={{ backgroundImage: `url(${gardenReferences[index]})` }}
                   aria-hidden="true"
                 />
                 {isReady ? <span className="garden-plant__ready">Harvest</span> : null}

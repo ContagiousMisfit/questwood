@@ -77,6 +77,9 @@ function QuestItem({
 
         <span className="quest-title">
           {quest.title}
+          <small className={`quest-period quest-period--${quest.period ?? 'daily'}`}>
+            {(quest.period ?? 'daily') === 'weekly' ? 'Weekly' : 'Daily'}
+          </small>
           <select
             className={`quest-priority-editor priority-${quest.priority ?? 'normal'}`}
             value={quest.priority ?? 'normal'}

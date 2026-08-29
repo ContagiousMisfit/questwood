@@ -24,7 +24,7 @@ function MascotGarden({
 
         <div>
           <span>Your companion</span>
-          <h2 id="mascot-garden-title">Teemo</h2>
+          <h2 id="mascot-garden-title">Totoro</h2>
         </div>
       </header>
 
@@ -34,7 +34,7 @@ function MascotGarden({
       />
 
       <p className="mascot-garden__hint">
-        Complete quests to make Teemo celebrate!
+        Complete quests to awaken the forest magic!
       </p>
 
     </section>

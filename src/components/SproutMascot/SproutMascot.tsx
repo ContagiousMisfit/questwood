@@ -1,4 +1,8 @@
 import './SproutMascot.scss'
+import totoroIdle from '../../assets/generated/totoro-states/state-0.png'
+import totoroCreated from '../../assets/generated/totoro-states/state-1.png'
+import totoroCompleted from '../../assets/generated/totoro-states/state-2.png'
+import totoroRemoved from '../../assets/generated/totoro-states/state-3.png'
 
 export type MascotMood =
   | 'idle'
@@ -18,6 +22,13 @@ const messages: Record<MascotMood, string> = {
   removed: 'That path can wait for another day.',
 }
 
+const sprites: Record<MascotMood, string> = {
+  idle: totoroIdle,
+  created: totoroCreated,
+  completed: totoroCompleted,
+  removed: totoroRemoved,
+}
+
 function SproutMascot({
   mood,
   animationKey,
@@ -31,8 +42,9 @@ function SproutMascot({
         <span
           key={`${mood}-${animationKey}`}
           className={`sprout-mascot__sprite sprout-mascot__sprite--${mood}`}
+          style={{ backgroundImage: `url(${sprites[mood]})` }}
           role="img"
-          aria-label="Questwood's cheerful guide"
+          aria-label="Totoro, Questwood's forest guide"
         />
       </div>
 

@@ -66,32 +66,29 @@
   width: 32px;
   height: 32px;
 
-  background-image: url('../../assets/sprout/teemo-emotes.png');
   background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center bottom;
   image-rendering: pixelated;
 
-  transform: translateX(-50%) scale(2.75);
+  transform: translateX(-50%) scale(2.2);
   transform-origin: bottom center;
 }
 
 .sprout-mascot__sprite--idle {
-  background-position: 0 -64px;
-  animation: mascot-idle 1.15s steps(5) infinite;
+  animation: mascot-idle 2.6s ease-in-out infinite;
 }
 
 .sprout-mascot__sprite--created {
-  background-position: 0 -160px;
-  animation: mascot-two-frames 520ms steps(2) 2;
+  animation: mascot-reaction 700ms ease-in-out 2;
 }
 
 .sprout-mascot__sprite--completed {
-  background-position: 0 -192px;
-  animation: mascot-two-frames 420ms steps(2) 3;
+  animation: mascot-celebrate 620ms ease-in-out 3;
 }
 
 .sprout-mascot__sprite--removed {
-  background-position: 0 -288px;
-  animation: mascot-two-frames 420ms steps(2) 2;
+  animation: mascot-reaction 760ms ease-in-out 2;
 }
 
 .sprout-mascot--created,
@@ -102,16 +99,11 @@
 }
 
 @keyframes mascot-idle {
-  to {
-    background-position-x: -160px;
-  }
+  50% { transform: translateX(-50%) translateY(-3px) scale(2.24); }
 }
 
-@keyframes mascot-two-frames {
-  to {
-    background-position-x: -64px;
-  }
-}
+@keyframes mascot-reaction { 50% { transform: translateX(-50%) translateY(-7px) rotate(-3deg) scale(2.25); } }
+@keyframes mascot-celebrate { 50% { transform: translateX(-50%) translateY(-9px) rotate(4deg) scale(2.3); filter: brightness(1.12); } }
 
 @keyframes mascot-speech-pop {
   0% {

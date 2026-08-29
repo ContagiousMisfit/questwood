@@ -2,6 +2,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react'
 
@@ -15,6 +16,7 @@ import type {
 const STORAGE_KEY = 'questwood:quests'
 const BONUS_COINS_KEY = 'questwood:bonus-coins'
 const SPENT_COINS_KEY = 'questwood:spent-coins'
+const COIN_BALANCE_KEY = 'questwood:coin-balance-v2'
 const XP_PER_LEVEL = 100
 
 function getRewards(period: QuestPeriod, priority: QuestPriority) {
@@ -87,6 +89,26 @@ function loadQuests(): Quest[] {
   }
 }
 
+function loadCoinBalance() {
+  const savedValue = localStorage.getItem(COIN_BALANCE_KEY)
+  const savedBalance = savedValue === null ? Number.NaN : Number(savedValue)
+
+  if (Number.isFinite(savedBalance) && savedBalance >= 0) return savedBalance
+
+  const legacyEarned = loadQuests()
+    .filter((quest) => quest.completed && quest.claimedAt && !quest.deletedAt)
+    .reduce((total, quest) => total + (quest.coins ?? 0), 0)
+  const legacyBonus = Number(localStorage.getItem(BONUS_COINS_KEY) ?? 0)
+  const legacySpent = Number(localStorage.getItem(SPENT_COINS_KEY) ?? 0)
+
+  return Math.max(
+    0,
+    legacyEarned +
+      (Number.isFinite(legacyBonus) ? legacyBonus : 0) -
+      (Number.isFinite(legacySpent) ? legacySpent : 0),
+  )
+}
+
 function getLocalDateKey(date: Date) {
   const year = date.getFullYear()
 
@@ -145,11 +167,9 @@ function calculateStreak(quests: Quest[]) {
 function useQuests() {
   const [quests, setQuests] =
     useState<Quest[]>(loadQuests)
-  const [bonusCoins, setBonusCoins] = useState(() =>
-    Number(localStorage.getItem(BONUS_COINS_KEY) ?? 0),
-  )
-  const [spentCoins, setSpentCoins] = useState(() =>
-    Number(localStorage.getItem(SPENT_COINS_KEY) ?? 0),
+  const [coinBalance, setCoinBalance] = useState(loadCoinBalance)
+  const claimedQuestIdsRef = useRef(
+    new Set(quests.filter((quest) => quest.claimedAt).map((quest) => quest.id)),
   )
 
   useEffect(() => {
@@ -160,9 +180,8 @@ function useQuests() {
   }, [quests])
 
   useEffect(() => {
-    localStorage.setItem(BONUS_COINS_KEY, String(bonusCoins))
-    localStorage.setItem(SPENT_COINS_KEY, String(spentCoins))
-  }, [bonusCoins, spentCoins])
+    localStorage.setItem(COIN_BALANCE_KEY, String(coinBalance))
+  }, [coinBalance])
 
   const addQuest = useCallback(
     (
@@ -351,10 +370,14 @@ function useQuests() {
 
       if (
         !selectedQuest?.completed ||
-        selectedQuest.claimedAt
+        selectedQuest.claimedAt ||
+        claimedQuestIdsRef.current.has(questId)
       ) {
         return false
       }
+
+      claimedQuestIdsRef.current.add(questId)
+      setCoinBalance((current) => current + (selectedQuest.coins ?? 0))
 
       setQuests((currentQuests) =>
         currentQuests.map((quest) =>
@@ -377,18 +400,25 @@ function useQuests() {
     (questIds: string[]) => {
       const idsToClaim = new Set(questIds)
 
-      const claimableCount = quests.filter(
+      const claimableQuests = quests.filter(
         (quest) =>
           idsToClaim.has(quest.id) &&
           quest.completed &&
-          !quest.claimedAt,
-      ).length
+          !quest.claimedAt &&
+          !claimedQuestIdsRef.current.has(quest.id),
+      )
+
+      const claimableCount = claimableQuests.length
 
       if (claimableCount === 0) {
         return 0
       }
 
       const claimedAt = new Date().toISOString()
+      claimableQuests.forEach((quest) => claimedQuestIdsRef.current.add(quest.id))
+      setCoinBalance((current) =>
+        current + claimableQuests.reduce((total, quest) => total + (quest.coins ?? 0), 0),
+      )
 
       setQuests((currentQuests) =>
         currentQuests.map((quest) =>
@@ -415,13 +445,6 @@ function useQuests() {
       0,
     )
 
-    const earnedCoins = completedQuests.reduce(
-      (total, quest) =>
-        total + (quest.coins ?? 0),
-      0,
-    )
-    const coins = Math.max(0, earnedCoins + bonusCoins - spentCoins)
-
     const level =
       Math.floor(totalXp / XP_PER_LEVEL) + 1
 
@@ -433,21 +456,21 @@ function useQuests() {
       currentLevelXp,
       xpForNextLevel: XP_PER_LEVEL,
       level,
-      coins,
+      coins: coinBalance,
       streak: calculateStreak(
         quests.filter((quest) => !quest.deletedAt),
       ),
     }
-  }, [quests, bonusCoins, spentCoins])
+  }, [quests, coinBalance])
 
   const addCoins = useCallback((amount: number) => {
-    setBonusCoins((current) => current + Math.max(0, amount))
+    setCoinBalance((current) => current + Math.max(0, amount))
   }, [])
 
   const spendCoins = useCallback(
     (amount: number) => {
       if (amount <= 0 || stats.coins < amount) return false
-      setSpentCoins((current) => current + amount)
+      setCoinBalance((current) => current - amount)
       return true
     },
     [stats.coins],
