@@ -1,95 +1,99 @@
-# React + TypeScript + Vite
+# 🌿 Questwood
 
-Questwood is a cozy, pixel-art quest journal built with React, TypeScript,
-Vite, and Sass. Add daily or weekly quests, earn XP and coins, build a
-streak, and celebrate progress with an animated garden companion.
+What if a to-do list felt less like work and more like opening a cozy game?
+**Questwood** is a cozy, gamified to-do application that transforms everyday productivity.
+> *Turn everyday tasks into tiny adventures.*
 
-## Development
+<img width="1356" height="940" alt="image" src="https://github.com/user-attachments/assets/ae83815b-8b46-48fd-af6a-d35f3370b557" />
+
+
+---
+
+## ✨ Features
+
+### 📝 Quest-based To-do List
+
+Create and organize your tasks as little quests.
+
+* Create tasks
+* Complete quests
+* Delete completed tasks
+* Move unfinished quests to tomorrow
+* Daily and recurring goals
+* Priority system
+* XP rewards
+* Task history
+
+## 🛠️ Built With
+
+* React
+* Vite
+* JavaScript
+* SCSS / CSS
+* Local browser storage
+* Responsive UI
+* Custom animations and interactions
+
+---
+
+## 🚀 Running Locally
+
+Clone the repository:
+
+```bash
+git clone https://github.com/ContagiousMisfit/questwood.git
+```
+
+Enter the project:
+
+```bash
+cd questwood
+```
+
+Install dependencies:
 
 ```bash
 npm install
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-Use `npm run lint` and `npm run build` before committing changes.
+Then open the local URL provided by Vite.
 
-## Asset credits
+---
 
-Sprout Lands assets by [Cup Nooble](https://cupnooble.itch.io/). Used and
-modified under the license included with the asset pack. These assets are
-licensed for non-commercial projects and must not be redistributed or
-resold as a standalone asset pack.
+## 📦 Production Build
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Create a production build with:
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+The generated application will be available inside:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```text
+dist/
 ```
+
+---
+
+## ⚠️ Disclaimer
+
+Questwood is an independent, non-commercial fan project.
+
+Studio Ghibli and its characters, films, artwork, and related properties belong to their respective copyright holders.
+
+Questwood is not affiliated with, endorsed by, or sponsored by Studio Ghibli.
+
+Any referenced artwork or characters are used solely within the context of this personal fan project.
+
+---
+
+<p align="center">
+  🌱 <strong>Complete quests. Grow your world.</strong> 🌱
+</p>
